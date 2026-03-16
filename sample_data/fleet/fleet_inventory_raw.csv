@@ -1,0 +1,6 @@
+vehicle_id,vin,vehicle_class,current_location_id,fleet_status,rentable_flag,odometer_miles,updated_at,schema_version,color
+V1001,1HGBH41JXMN109186,SUV,DTW01,available,true,28411,2026-03-01T08:00:00Z,1.0.0,black
+V1002,2A4RR5D14AR275841,ECONOMY,ORD01,maintenance,false,40112,2026-03-01T08:05:00Z,1.0.0,white
+V1003,5J6RM4H75EL021998,LUXURY,LAX01,reserved,false,18432,2026-03-01T08:06:00Z,1.0.0,silver
+V1003,5J6RM4H75EL021998,LUXURY,LAX01,reserved,false,18432,2026-03-01T08:07:00Z,1.0.1,silver
+V1004,1N4AL3AP9JC123456,ECONOMY,SEA01,,true,33210,2026-03-01T08:10:00Z,1.0.0,blue

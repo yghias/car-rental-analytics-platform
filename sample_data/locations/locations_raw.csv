@@ -1,0 +1,6 @@
+location_id,location_name,city,state,region,airport_flag,updated_at,timezone
+DTW01,Detroit Airport,Detroit,MI,MIDWEST,true,2026-03-01T00:00:00Z,America/Detroit
+ORD01,Chicago O'Hare,Chicago,IL,MIDWEST,true,2026-03-01T00:00:00Z,America/Chicago
+LAX01,Los Angeles Airport,Los Angeles,CA,WEST,true,2026-03-01T00:00:00Z,America/Los_Angeles
+SFO01,San Francisco Downtown,San Francisco,CA,WEST,false,2026-03-01T00:00:00Z,America/Los_Angeles
+SEA01,Seattle Downtown,Seattle,WA,WEST,false,2026-03-01T00:00:00Z,America/Los_Angeles

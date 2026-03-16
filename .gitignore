@@ -13,4 +13,5 @@ airflow/logs/
 *.pyo
 *.parquet
 *.csv
+!sample_data/**/*.csv
 *.duckdb

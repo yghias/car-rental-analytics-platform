@@ -31,9 +31,13 @@ jobs:
           PY
       - name: SQL sanity checks
         run: |
+          test -s DECISIONS.md
           test -s sql/schema.sql
           test -s sql/marts.sql
           test -s sql/tests.sql
           test -s sql/warehouse_admin.sql
           test -s models/schema.yml
+          test -s src/ingestion/api_ingest.py
+          test -s src/ingestion/file_ingest.py
+          test -s src/streaming/booking_events_consumer.py
           find models -name "*.sql" | sort

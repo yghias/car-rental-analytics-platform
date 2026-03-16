@@ -1,0 +1,4 @@
+maintenance_event_id,vehicle_id,location_id,maintenance_type,opened_at,closed_at,estimated_cost_amount,technician_notes
+M1001,V1002,ORD01,brake_service,2026-03-01T03:00:00Z,2026-03-01T08:00:00Z,420.00,pad replacement
+M1002,V1003,LAX01,inspection,2026-03-05T06:00:00Z,2026-03-05T07:30:00Z,85.00,pre-rental inspection
+M1003,V1004,SEA01,tire_replacement,2026-03-02T11:00:00Z,2026-03-02T09:00:00Z,210.00,bad timestamp for testing

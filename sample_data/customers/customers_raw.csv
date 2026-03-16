@@ -1,0 +1,6 @@
+customer_id,loyalty_tier,country_code,marketing_opt_in,updated_at,customer_segment
+C201,GOLD,US,true,2026-03-01T06:00:00Z,business
+C202,STANDARD,US,false,2026-03-01T06:02:00Z,leisure
+C203,PLATINUM,US,true,2026-03-01T06:03:00Z,premium
+C204,,US,true,2026-03-01T06:04:00Z,leisure
+C205,GOLD,CA,true,2026-03-03T01:00:00Z,business
