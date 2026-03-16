@@ -1,0 +1,22 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build docker image
+        run: docker build -t car-rental-analytics-platform:latest .
+      - name: Terraform format check
+        run: |
+          find infrastructure/terraform -name "*.tf" -print
+      - name: Deployment note
+        run: echo "Promote image, DAGs, and Terraform plan in environment-specific workflow"

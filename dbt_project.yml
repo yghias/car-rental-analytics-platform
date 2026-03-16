@@ -1,0 +1,19 @@
+name: car_rental_analytics_platform
+version: 1.0.0
+config-version: 2
+
+profile: car_rental_analytics
+
+model-paths: ["models"]
+seed-paths: ["sample_data"]
+analysis-paths: ["sql"]
+test-paths: ["sql"]
+macro-paths: []
+snapshot-paths: []
+
+models:
+  car_rental_analytics_platform:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

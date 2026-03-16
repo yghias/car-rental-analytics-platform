@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+dist/
+build/
+logs/
+target/
+dbt_packages/
+airflow/logs/
+*.pyc
+*.pyo
+*.parquet
+*.csv
+*.duckdb
