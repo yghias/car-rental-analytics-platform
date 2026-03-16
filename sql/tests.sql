@@ -57,3 +57,38 @@ select
 from marts.mart_operational_kpis
 where maintenance_vehicle_count > available_vehicle_count
   and available_vehicle_count is not null;
+
+select
+    service_date,
+    location_id,
+    vehicle_class,
+    booking_conversion_rate
+from marts.mart_booking_conversion
+where booking_conversion_rate < 0
+   or booking_conversion_rate > 1;
+
+select
+    service_date,
+    location_id,
+    vehicle_class,
+    booking_channel,
+    booking_channel_rank
+from marts.mart_channel_mix
+where booking_channel_rank < 1;
+
+select
+    service_date,
+    location_id,
+    vehicle_class,
+    forecast_error_pct
+from marts.mart_location_forecast_gap
+where forecast_error_pct > 2;
+
+select
+    location_id,
+    vehicle_class,
+    total_downtime_hours,
+    impacted_vehicle_count
+from marts.mart_downtime_exposure
+where impacted_vehicle_count = 0
+  and total_downtime_hours > 0;

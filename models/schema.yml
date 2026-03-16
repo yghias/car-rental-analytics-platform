@@ -70,10 +70,64 @@ models:
       - name: realized_revenue_amount
         tests: [not_null]
 
+  - name: dim_customer
+    description: Conformed customer dimension for loyalty and country-level reporting.
+    columns:
+      - name: customer_id
+        tests: [not_null]
+
+  - name: dim_date
+    description: Date dimension derived from booking activity dates.
+    columns:
+      - name: calendar_date
+        tests: [not_null, unique]
+
+  - name: dim_vehicle_class
+    description: Distinct rentable vehicle classes exposed to reporting marts.
+    columns:
+      - name: vehicle_class
+        tests: [not_null, unique]
+
   - name: mart_branch_daily_performance
     description: Branch-day revenue and supply mart for operations and executive review.
     columns:
       - name: service_date
         tests: [not_null]
       - name: location_id
+        tests: [not_null]
+
+  - name: mart_booking_conversion
+    description: Booking conversion and cancellation mart by service date, branch, and vehicle class.
+    columns:
+      - name: booking_conversion_rate
+        tests: [not_null]
+
+  - name: mart_pricing_performance
+    description: Pricing performance mart with prior-day comparisons and revenue deltas.
+    columns:
+      - name: service_date
+        tests: [not_null]
+
+  - name: mart_revenue_summary
+    description: Revenue summary mart aggregating booking and realized revenue by branch and class.
+    columns:
+      - name: realized_revenue_amount
+        tests: [not_null]
+
+  - name: mart_channel_mix
+    description: Booking channel mix mart with ranked contribution by branch, class, and day.
+    columns:
+      - name: booking_channel_rank
+        tests: [not_null]
+
+  - name: mart_downtime_exposure
+    description: Maintenance downtime and cost exposure mart by location and vehicle class.
+    columns:
+      - name: impacted_vehicle_count
+        tests: [not_null]
+
+  - name: mart_location_forecast_gap
+    description: Forecast-versus-actual mart for branch and class level demand variance.
+    columns:
+      - name: forecast_error
         tests: [not_null]

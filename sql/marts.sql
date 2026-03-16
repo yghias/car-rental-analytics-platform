@@ -119,3 +119,93 @@ left join marts.fact_vehicle_utilization u
 left join marts.fact_revenue r
   on b.booking_id = r.booking_id
 group by 1, 2, 3;
+
+create or replace table marts.mart_pricing_performance as
+select
+    p.service_date,
+    p.location_id,
+    p.vehicle_class,
+    p.channel,
+    p.booking_count,
+    p.avg_rate_amount,
+    p.realized_revenue_amount,
+    lag(p.avg_rate_amount) over (
+        partition by p.location_id, p.vehicle_class, p.channel
+        order by p.service_date
+    ) as prior_day_avg_rate_amount,
+    p.realized_revenue_amount - lag(p.realized_revenue_amount) over (
+        partition by p.location_id, p.vehicle_class, p.channel
+        order by p.service_date
+    ) as revenue_delta_vs_prior_day
+from marts.fact_pricing_effectiveness p;
+
+create or replace table marts.mart_revenue_summary as
+select
+    service_date,
+    location_id,
+    vehicle_class,
+    sum(realized_revenue_amount) as realized_revenue_amount,
+    sum(booked_revenue_amount) as booked_revenue_amount,
+    count(distinct booking_id) as booking_count,
+    round(avg(realized_revenue_amount), 2) as avg_revenue_per_booking
+from marts.fact_revenue
+group by 1, 2, 3;
+
+create or replace table marts.mart_booking_conversion as
+select
+    pickup_date as service_date,
+    location_id,
+    vehicle_class,
+    count(distinct booking_id) as total_booking_count,
+    sum(case when booking_status <> 'cancelled' then 1 else 0 end) as converted_booking_count,
+    sum(case when booking_status = 'cancelled' then 1 else 0 end) as cancelled_booking_count,
+    case
+        when count(distinct booking_id) = 0 then 0
+        else round(
+            sum(case when booking_status <> 'cancelled' then 1 else 0 end)
+            / count(distinct booking_id),
+            4
+        )
+    end as booking_conversion_rate
+from marts.fact_booking
+group by 1, 2, 3;
+
+create or replace table marts.mart_channel_mix as
+select
+    d.service_date,
+    d.location_id,
+    d.vehicle_class,
+    d.booking_channel,
+    sum(d.active_booking_day_count) as active_booking_day_count,
+    row_number() over (
+        partition by d.service_date, d.location_id, d.vehicle_class
+        order by sum(d.active_booking_day_count) desc
+    ) as booking_channel_rank
+from marts.fact_booking_day d
+group by 1, 2, 3, 4;
+
+create or replace table marts.mart_downtime_exposure as
+select
+    m.location_id,
+    v.vehicle_class,
+    sum(m.downtime_hours) as total_downtime_hours,
+    sum(m.estimated_cost_amount) as maintenance_cost_amount,
+    count(distinct m.vehicle_id) as impacted_vehicle_count
+from marts.fact_maintenance_downtime m
+left join marts.dim_vehicle v
+  on m.vehicle_id = v.vehicle_id
+group by 1, 2;
+
+create or replace table marts.mart_location_forecast_gap as
+select
+    f.service_date,
+    f.location_id,
+    f.vehicle_class,
+    f.actual_booking_count,
+    f.forecasted_booking_count,
+    f.forecast_error,
+    case
+        when f.actual_booking_count = 0 then null
+        else round(abs(f.forecast_error) / f.actual_booking_count, 4)
+    end as forecast_error_pct
+from marts.fact_forecast_actual f;
