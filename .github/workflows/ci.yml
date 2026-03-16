@@ -33,8 +33,13 @@ jobs:
         run: |
           test -s DECISIONS.md
           test -s sql/core.sql
+          test -s sql/backfill_operations.sql
           test -s sql/schema.sql
           test -s sql/marts.sql
+          test -s sql/ops_monitoring.sql
+          test -s sql/performance_optimization.sql
+          test -s sql/reconciliation.sql
+          test -s sql/security_rbac.sql
           test -s sql/semantic_metrics.sql
           test -s sql/tests.sql
           test -s sql/warehouse_admin.sql

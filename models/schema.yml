@@ -131,3 +131,39 @@ models:
     columns:
       - name: forecast_error
         tests: [not_null]
+
+  - name: mart_executive_scorecard
+    description: Executive scorecard combining operational, revenue, and forecast metrics at branch-day grain.
+    columns:
+      - name: service_date
+        tests: [not_null]
+
+  - name: mart_booking_lead_time
+    description: Booking lead-time mart summarizing how far in advance reservations are made.
+    columns:
+      - name: avg_booking_lead_days
+        tests: [not_null]
+
+  - name: mart_customer_segment_performance
+    description: Customer segment performance mart by loyalty tier, geography, and vehicle class.
+    columns:
+      - name: booking_count
+        tests: [not_null]
+
+  - name: mart_fleet_capacity_risk
+    description: Capacity risk mart comparing booking pace against available fleet supply.
+    columns:
+      - name: capacity_risk_status
+        tests: [not_null]
+
+  - name: mart_regional_revenue_trends
+    description: Regional revenue trend mart with prior-period comparison logic.
+    columns:
+      - name: realized_revenue_amount
+        tests: [not_null]
+
+  - name: mart_vehicle_idle_days
+    description: Vehicle-day idle exposure mart supporting utilization optimization.
+    columns:
+      - name: idle_vehicle_day_flag
+        tests: [not_null]
