@@ -1,0 +1,79 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Immutable landed source records and external table references.
+    tables:
+      - name: bookings
+        description: Raw reservation payloads from the booking source system.
+      - name: fleet_inventory
+        description: Raw fleet master and snapshot extracts.
+      - name: customers
+        description: Raw customer profile records.
+      - name: locations
+        description: Raw branch and location reference records.
+      - name: pricing_events
+        description: Raw pricing and rate override records.
+      - name: maintenance_events
+        description: Raw maintenance and work-order extracts.
+
+models:
+  - name: stg_bookings
+    description: Typed booking records standardized from the raw reservation feed.
+    columns:
+      - name: booking_id
+        tests: [not_null, unique]
+      - name: pickup_location_id
+        tests: [not_null]
+      - name: return_location_id
+        tests: [not_null]
+      - name: booking_status
+        tests:
+          - accepted_values:
+              values: ["booked", "cancelled", "checked_out", "checked_in", "extended"]
+
+  - name: stg_fleet_inventory
+    description: Typed fleet snapshot records with standardized vehicle class and status values.
+    columns:
+      - name: vehicle_id
+        tests: [not_null]
+      - name: current_location_id
+        tests: [not_null]
+
+  - name: stg_pricing_events
+    description: Typed pricing event records with effective windows for location, class, and channel analysis.
+    columns:
+      - name: pricing_event_id
+        tests: [not_null, unique]
+      - name: rate_amount
+        tests: [not_null]
+
+  - name: fact_booking
+    description: Booking-grain mart used for booking analytics and downstream revenue logic.
+    columns:
+      - name: booking_id
+        tests: [not_null, unique]
+      - name: location_id
+        tests: [not_null]
+
+  - name: fact_vehicle_utilization
+    description: Vehicle-day utilization fact used for supply and downtime analysis.
+    columns:
+      - name: snapshot_date
+        tests: [not_null]
+      - name: vehicle_id
+        tests: [not_null]
+
+  - name: fact_revenue
+    description: Revenue mart aligned to booking service dates for financial and yield reporting.
+    columns:
+      - name: realized_revenue_amount
+        tests: [not_null]
+
+  - name: mart_branch_daily_performance
+    description: Branch-day revenue and supply mart for operations and executive review.
+    columns:
+      - name: service_date
+        tests: [not_null]
+      - name: location_id
+        tests: [not_null]

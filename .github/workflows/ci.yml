@@ -34,3 +34,6 @@ jobs:
           test -s sql/schema.sql
           test -s sql/marts.sql
           test -s sql/tests.sql
+          test -s sql/warehouse_admin.sql
+          test -s models/schema.yml
+          find models -name "*.sql" | sort

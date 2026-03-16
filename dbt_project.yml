@@ -17,3 +17,6 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+vars:
+  booking_statuses: ["booked", "cancelled", "checked_out", "checked_in", "extended"]

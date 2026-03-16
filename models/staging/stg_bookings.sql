@@ -3,6 +3,7 @@ select
     customer_id,
     pickup_location_id,
     return_location_id,
+    'unknown' as booking_channel,
     upper(vehicle_class) as vehicle_class,
     lower(booking_status) as booking_status,
     cast(scheduled_pickup_ts as timestamp) as scheduled_pickup_ts,

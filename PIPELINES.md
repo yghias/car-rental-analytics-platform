@@ -12,6 +12,8 @@ The platform organizes data movement into five major pipeline families:
 
 Each pipeline is designed around replayability, auditability, and business-tolerant failure handling.
 
+The implementation is intentionally SQL-forward once data lands in the warehouse. Python services are responsible for extraction and event handling; warehouse logic, metric definitions, mart construction, and most business rules should remain in SQL so they can be reviewed and governed like first-class database assets.
+
 ## Batch Ingestion Pipelines
 
 ### Booking ingestion
@@ -129,6 +131,7 @@ Core transformations:
 - join bookings to dimensions
 - derive actual trip durations and realized revenue
 - convert maintenance events into downtime windows
+- persist core tables with deterministic merge logic and warehouse audit columns
 
 ### Marts
 
@@ -138,6 +141,15 @@ Marts are refreshed from core models and optimized for:
 - pricing effectiveness
 - executive KPI reporting
 - forecasting feature generation
+- booking pace and same-day demand monitoring
+- revenue per available car day and downtime-adjusted capacity
+
+### SQL Materialization Strategy
+
+- Staging models are typically views to preserve freshness and simplify lineage.
+- Core and fact models should be incremental or merge-based where warehouse support exists.
+- High-value reporting marts should be materialized tables with predictable performance characteristics.
+- Operational KPI views can be exposed as lightweight semantic-layer views on top of marts.
 
 ## Scheduling Strategy
 

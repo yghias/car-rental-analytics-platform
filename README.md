@@ -2,7 +2,7 @@
 
 `car-rental-analytics-platform` is an end-to-end cloud data platform for a multi-location car rental business. It ingests operational data from reservation systems, fleet tools, pricing services, customer platforms, maintenance systems, file drops, and streaming events, then transforms those inputs into trusted warehouse models for utilization analytics, revenue reporting, pricing analysis, demand forecasting, and operational dashboards.
 
-This repository is written as a production-style portfolio project. It emphasizes realistic data platform concerns including incremental ingestion, near-real-time event processing, warehouse modeling, orchestration, observability, lineage, access control, idempotent backfills, and business-aligned analytical outputs.
+This repository is written as a production-style portfolio project with a deliberately SQL-heavy implementation style. It emphasizes realistic data platform concerns including incremental ingestion, near-real-time event processing, warehouse modeling, dimensional marts, SQL-first transformations, orchestration, observability, lineage, access control, idempotent backfills, and business-aligned analytical outputs.
 
 ## Business Problem
 
@@ -42,7 +42,7 @@ See [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analyti
 - Python for ingestion, streaming, transformation helpers, and ML utilities
 - Kafka for event-driven booking, pricing, and fleet status processing
 - Snowflake-oriented warehouse design with Redshift-compatible modeling concepts
-- dbt-style SQL models under `models/`
+- SQL-first warehouse contracts, dimensional marts, and dbt-style models under `sql/` and `models/`
 - Airflow DAGs for orchestration, backfills, and quality checks
 - Cloud object storage patterns for raw and curated zones
 - Terraform for infrastructure definition
@@ -64,6 +64,7 @@ See [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analyti
 - Standardize source payloads into typed staging models.
 - Build canonical core entities with consistent keys and status mappings.
 - Publish fact and dimension models for reporting and analytics.
+- Materialize SQL-heavy marts for branch daily performance, booking pace, pricing effectiveness, downtime exposure, and forecast actuals.
 
 ### Forecasting and analytics
 - Generate feature sets by location, date, and vehicle class.
@@ -91,6 +92,9 @@ In car rental, inventory is both expensive and perishable. A missed booking sign
 - [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/ARCHITECTURE.md): system design, layer responsibilities, and tradeoffs
 - [DATA_MODEL.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/DATA_MODEL.md): conceptual, logical, physical, and dimensional modeling strategy
 - [PIPELINES.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/PIPELINES.md): ingestion and transformation pipeline design
+- [sql/schema.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/schema.sql): warehouse DDL for schemas, core entities, marts, and operational metadata
+- [sql/marts.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/marts.sql): production-style reporting and semantic mart SQL
+- [sql/tests.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/tests.sql): warehouse data quality and reconciliation assertions
 - [GOVERNANCE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/GOVERNANCE.md): source authority, lineage, metadata, stewardship, and controls
 - [OBSERVABILITY.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/OBSERVABILITY.md): SLAs, monitoring, alerting, and run-level telemetry
 - [RUNBOOK.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/RUNBOOK.md): operational procedures for failures, replays, and backfills

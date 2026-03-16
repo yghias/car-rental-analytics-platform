@@ -12,6 +12,8 @@ The data model is designed to support both operational analysis and historical f
 
 This pattern reduces coupling between upstream systems and downstream analytics while keeping lineage explicit.
 
+The implementation intentionally favors warehouse-native SQL for business transformations. Python is used primarily for ingestion, orchestration support, and feature engineering helpers, while the business logic that defines trusted metrics lives in SQL assets that are easier for analytics engineers, database engineers, and reviewers to audit.
+
 ## Conceptual Domains
 
 ### Reservation Demand
@@ -135,6 +137,14 @@ Derived metric set representing vehicle use, idle time, and downtime over a defi
 - `ops`
   run metadata, ingestion audit, and data quality results
 
+### SQL-First Modeling Conventions
+
+- `stg_*` models keep source shape recognizable while enforcing typing and naming standards.
+- `fact_*` models define business-process grain explicitly and avoid hidden aggregations.
+- `dim_*` models provide conformed dimensions for location, vehicle, customer, and commercial attributes.
+- `mart_*` models package decision-ready aggregations for pricing, operations, forecasting, and executive dashboards.
+- `ops_*` tables record pipeline runs, quality failures, and lineage-relevant execution metadata.
+
 ### Storage Patterns
 
 - Append-only event tables for booking and pricing changes
@@ -150,12 +160,16 @@ Derived metric set representing vehicle use, idle time, and downtime over a defi
   Grain: one row per booking
 - `fact_booking_day`
   Grain: one row per booking per rental day
+- `fact_booking_pace`
+  Grain: one row per pickup date, location, vehicle class, and booking creation date
 - `fact_vehicle_utilization`
   Grain: one row per vehicle per date
 - `fact_revenue`
   Grain: one row per booking, with optional daily revenue allocations
 - `fact_pricing_event`
   Grain: one row per pricing decision event
+- `fact_pricing_effectiveness`
+  Grain: one row per location, vehicle class, service date, and booking channel
 - `fact_maintenance_downtime`
   Grain: one row per maintenance event
 - `fact_forecast_actual`
@@ -170,6 +184,23 @@ Derived metric set representing vehicle use, idle time, and downtime over a defi
 - `dim_customer`
 - `dim_channel`
 - `dim_rate_plan`
+- `dim_booking_channel`
+- `dim_location_hierarchy`
+
+### Core Warehouse Tables
+
+The SQL DDL should support:
+
+- `core.booking`
+- `core.booking_event`
+- `core.vehicle`
+- `core.fleet_status_snapshot`
+- `core.customer`
+- `core.location`
+- `core.pricing_event`
+- `core.maintenance_event`
+- `ops.pipeline_run`
+- `ops.data_quality_result`
 
 ## Source-of-Truth Strategy
 
@@ -205,3 +236,5 @@ Derived from the model:
 - maintenance downtime hours
 - pricing conversion uplift
 - forecast accuracy by location and class
+- booking pace versus fleet capacity
+- realized revenue versus priced rate opportunity
