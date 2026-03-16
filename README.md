@@ -35,7 +35,7 @@ The platform follows a layered cloud data architecture:
 7. ML and forecasting layer
    Feature generation and scoring pipelines support demand forecasting and pricing analysis.
 
-See [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/ARCHITECTURE.md) and [PLAN.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/PLAN.md) for the full blueprint.
+See [ARCHITECTURE.md](ARCHITECTURE.md) and [PLAN.md](PLAN.md) for the full blueprint.
 
 ## Tech Stack
 
@@ -81,7 +81,7 @@ This platform is designed to improve:
 - Operational awareness of downtime and out-of-service inventory
 - Forecast-driven planning for demand, capacity, and staffing
 
-Illustrative outcomes are documented in [RESULTS.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/RESULTS.md).
+Illustrative outcomes are documented in [RESULTS.md](RESULTS.md).
 
 ## Why This Platform Matters
 
@@ -89,15 +89,15 @@ In car rental, inventory is both expensive and perishable. A missed booking sign
 
 ## Repository Guide
 
-- [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/ARCHITECTURE.md): system design, layer responsibilities, and tradeoffs
-- [DATA_MODEL.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/DATA_MODEL.md): conceptual, logical, physical, and dimensional modeling strategy
-- [PIPELINES.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/PIPELINES.md): ingestion and transformation pipeline design
-- [sql/schema.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/schema.sql): warehouse DDL for schemas, core entities, marts, and operational metadata
-- [sql/marts.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/marts.sql): production-style reporting and semantic mart SQL
-- [sql/tests.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/tests.sql): warehouse data quality and reconciliation assertions
-- [GOVERNANCE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/GOVERNANCE.md): source authority, lineage, metadata, stewardship, and controls
-- [OBSERVABILITY.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/OBSERVABILITY.md): SLAs, monitoring, alerting, and run-level telemetry
-- [RUNBOOK.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/RUNBOOK.md): operational procedures for failures, replays, and backfills
+- [ARCHITECTURE.md](ARCHITECTURE.md): system design, layer responsibilities, and tradeoffs
+- [DATA_MODEL.md](DATA_MODEL.md): conceptual, logical, physical, and dimensional modeling strategy
+- [PIPELINES.md](PIPELINES.md): ingestion and transformation pipeline design
+- [sql/schema.sql](sql/schema.sql): warehouse DDL for schemas, core entities, marts, and operational metadata
+- [sql/marts.sql](sql/marts.sql): production-style reporting and semantic mart SQL
+- [sql/tests.sql](sql/tests.sql): warehouse data quality and reconciliation assertions
+- [GOVERNANCE.md](GOVERNANCE.md): source authority, lineage, metadata, stewardship, and controls
+- [OBSERVABILITY.md](OBSERVABILITY.md): SLAs, monitoring, alerting, and run-level telemetry
+- [RUNBOOK.md](RUNBOOK.md): operational procedures for failures, replays, and backfills
 
 ## Local Development
 
@@ -120,4 +120,4 @@ python -m src.ml.demand_forecast_train --train-date 2026-03-01
 ## Notes
 
 - The code is intentionally sample-friendly but structured like a reviewable production repository.
-- PNG assets under `docs/` are lightweight placeholders; Mermaid source diagrams are documented in [ARCHITECTURE.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/ARCHITECTURE.md).
+- PNG assets under `docs/` are lightweight placeholders; Mermaid source diagrams are documented in [ARCHITECTURE.md](ARCHITECTURE.md).

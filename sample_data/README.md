@@ -35,4 +35,4 @@ The sample datasets are intentionally imperfect and cover:
 - maintenance records with impossible timestamps
 - schema drift via additive columns such as `promo_code`, `schema_version`, `discount_pct`, and `timezone`
 
-These scenarios are meant to exercise the SQL validation logic in [sql/tests.sql](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/sql/tests.sql) and the profiling notebook in [notebooks/data_quality_checks.ipynb](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/notebooks/data_quality_checks.ipynb).
+These scenarios are meant to exercise the SQL validation logic in [sql/tests.sql](../sql/tests.sql) and the profiling notebook in [notebooks/data_quality_checks.ipynb](../notebooks/data_quality_checks.ipynb).

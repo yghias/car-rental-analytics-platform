@@ -87,7 +87,7 @@ Snowflake is the reference warehouse in this design because of its support for e
 
 ### 7. Semantic and Reporting Layer
 
-Operational, finance, and executive dashboards consume curated marts. Metric definitions are documented centrally in [dashboards/metrics.md](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/dashboards/metrics.md) to avoid inconsistent KPI logic across teams.
+Operational, finance, and executive dashboards consume curated marts. Metric definitions are documented centrally in [dashboards/metrics.md](dashboards/metrics.md) to avoid inconsistent KPI logic across teams.
 
 ### 8. ML and Forecasting Layer
 
@@ -171,8 +171,8 @@ flowchart TB
 
 Placeholder image files live at:
 
-- [overview.png](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/docs/overview.png)
-- [data-flow.png](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/docs/data-flow.png)
-- [schema.png](/Users/yasserghias/Documents/Playground/car-rental-analytics-platform/docs/schema.png)
+- [overview.png](docs/overview.png)
+- [data-flow.png](docs/data-flow.png)
+- [schema.png](docs/schema.png)
 
 They are lightweight repository assets; the Mermaid definitions above are the authoritative reviewable diagrams.
